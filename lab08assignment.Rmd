@@ -1,0 +1,253 @@
+---
+title: 'Stats 250: Lab 8'
+author: "Replace this text with your name"
+date: "Week of April 10th"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Load Package
+
+Depending on your analysis below, you may need one of the functions from the stats250package. Please run the code chunk below to load this package!
+
+```{r stats250package}
+library(stats250package)
+```
+
+
+
+***
+
+
+### Instructions
+
+Complete the 8 lab exercises below. Each exercise will be worth 2 points and everyone will receive 4 additional points for their submission (making a total of 20 points). Today, you will be carrying out an analysis question of your choosing based on one of three backgrounds / data sets. You may choose to run one of the following inference procedures:
+
+- Test for a difference in two population means
+- Test for a difference in two population proportions
+- Test for a linear relationship
+- Chi-square test of independence
+
+Upon completion, follow the submission instructions at the bottom of this document. We strongly encourage you to work on this assignment with a partner. 
+
+
+***
+
+
+### Background 1: English Premier League
+
+The data set `epl` contains information and attributes (as measured by the FIFA video game) for a random sample of 400 English Premier League soccer players. This data set can be used to make inferences about the population of all English Premier League Soccer players. The variables in the data set include:
+
+- `position`: position played by the player (Defender, Midfielder, or Forward)
+- `preferred_foot`: preferred foot of the player (Left, Right)
+- `age`: age of the player (in years)
+- `height_cm`: height of the player (in cm)
+- `weight_kg`: weight of the player (in kg)
+- `overall`: overall skill rating (out of 100 points)
+- `pace`: speed of the player (out of 100 points)
+- `shooting`: shooting ability of the player (out of 100 points)
+- `passing`: passing ability of the player (out of 100 points)
+- `dribbling`: dribbling ability of the player (out of 100 points)
+- `defending`: defending ability of the player (out of 100 points)
+
+Use the following code chunk to read in the data set. 
+
+```{r readepl}
+epl <- read.csv("epl.csv", row.names = 1)
+```
+
+You can preview the data below.
+
+```{r previewepl}
+head(epl)
+```
+
+
+***
+
+
+### Background 2: Pokemon
+
+The data set `pokemon` contains information and stats for a random sample of 167 Pokemon. This data set can be used to make inferences about the population of all Pokemon (represented by this sample). The variables in the data set include:
+
+- `type`: primary type of the Pokemon (Dragon, Electric, Fire, Psychic)
+- `legendary_status`: denotes if the Pokemon is legendary (Legendary, Non-Legendary)
+- `weight_kg`: weight of the Pokemon (in kg)
+- `attack`: base attack of the Pokemon (in points)
+- `defense`: base defense of the Pokemon (in points)
+- `hp`: base HP (hit points) of the Pokemon (in points)
+- `speed`: base speed of the Pokemon (in points)
+- `sp_attack`: base special attack of the Pokemon (in points)
+- `sp_defense`: base special defense of the Pokemon (in points)
+- `capture_rate`: capture rate of the Pokemon (in points)
+- `base_total`: total base score of the Pokemon (in points)
+
+Use the following code chunk to read in the data set. 
+
+```{r readpokemon}
+pokemon <- read.csv("pokemon.csv", row.names = 1)
+```
+
+You can preview the data below.
+
+```{r previewpokemon}
+head(pokemon)
+```
+
+
+***
+
+
+### Background 3: Vehicle Emissions
+
+The data set `emissions` contains information for a random sample of 207 vehicles. This data set can be used to make inferences about the population of all vehicles (represented by this sample). The variables in the data set include:
+
+- `vehicle_class`: class/segment of the vehicle (Car, Truck/SUV)
+- `fuel_type`: type of fuel used for the vehicle (Gas, Diesel)
+- `engine_size`: size of the vehicle's engine (in liters)
+- `cylinders`: number of cylinders in the vehicle's engine
+- `fuel_consumption`: amount of fuel consumed by the vehicle (in liters per 100km, similar to miles per gallon (mpg))
+- `CO2_emissions`: amount of CO2 emissions produced by the vehicle (in grams of CO2 per km)
+
+Use the following code chunk to read in the data set. 
+
+```{r reademissions}
+emissions <- read.csv("emissions.csv", row.names = 1)
+```
+
+You can preview the data below.
+
+```{r previewemissions}
+head(emissions)
+```
+
+
+***
+
+
+### Lab Exercises
+
+After reading the backgrounds above, complete the following lab exercises. Remember, these exercises are worth 2 points each and are graded for correctness.
+
+> **1.** Choose one of the backgrounds to analyze and report the name of it below. Using your chosen background, propose one analysis question that involves two of the variables included in the provided data set. (This could be a question involving a difference in two means, a difference in two proportions, a linear relationship, or a Chi-square test of independence!) 
+
+*Background:* Replace this text with your chosen background.
+
+*Analysis Question:* Replace this text with the question you wish to analyze.
+
+
+
+> **2.** Your analysis question should involve two variables. First, identify which variable will play the role of the response and which will play the role of the explanatory (or grouping). Then, identify the type of each variable (categorical or quantitative).
+
+*Response Variable:* Replace this text with your response variable.
+
+*Explanatory Variable:* Replace this text with your explanatory (or grouping) variable.
+
+*Variable Types:* Replace this text with the variable types (quantitative or categorical). 
+
+
+
+> **3.** State the null and alternative hypothesis for your analysis question. Then, define your parameter(s) of interest below. Note: if you are running a Chi-square test of independence, you will only have a null hypothesis (no alternative is needed) and there will not be any parameters to define. 
+
+*H0:* Replace this text with your null hypothesis
+
+*Ha:* Replace this text with your alternative hypothesis 
+
+*Parameter Definition:* Replace this text with the definition of the parameter(s).
+
+
+
+> **4.** Create a table or plot that would help descriptively answer your proposed analysis question. This could be a two-way table, a side-by-side boxplot, or a scatterplot (depending on your question). This question may require multiple code chunks, but it's also possible that you do not use them all! Based on your table or plot, comment on whether the sample data provides evidence against your null hypothesis (i.e., supports your alternative hypothesis). **Note:** we have provided an additional document (titled `lab08functions.Rmd`) that has helpful functions for all possible tests. You can find it in the Files section in the bottom right!
+
+```{r exercise4a, error = T}
+# Replace this comment with your code
+
+```
+
+```{r exercise4b, error = T}
+# Replace this comment with your code
+
+```
+
+*Answer:* Replace this text with your answer.
+
+
+
+> **5.** State the assumptions needed to perform your hypothesis test. Note: you will check these assumptions in the next exercise.  
+
+*Answer:* Replace this text with all of the assumptions needed to perform your test. 
+
+
+
+> **6.** Check the assumptions needed to perform your hypothesis test. This might require multiple plots so we have included multiple code chunks below. It is possible that you do not use them all! Comment on whether or not the assumptions seem reasonably met. 
+
+```{r exercise6a, error = T}
+# Replace this comment with your code
+
+```
+
+```{r exercise6b, error = T}
+# Replace this comment with your code
+
+```
+
+```{r exercise6c, error = T}
+# Replace this comment with your code
+
+```
+
+```{r exercise6d, error = T}
+# Replace this comment with your code
+
+```
+
+*Answer:* Replace this text with your answer. 
+
+
+
+> **7.** (Regardless of whether or not your assumptions were met, carry out your hypothesis test below. Note: we should typically only proceed if the assumptions are met.) Use R to run your hypothesis test and report the corresponding p-value below.  
+
+```{r exercise7, error = T}
+# Replace this comment with your code
+
+```
+
+*Answer:* Replace this text with your p-value.
+
+
+
+> **8.** Provide an evaluation of your p-value and write a conclusion (within the context of your problem) that answers your original question.  
+
+*Evaluation:* Replace this text with the evaluation of your p-value.
+
+*Conclusions:* Replace this text with your conclusion (within context).
+
+
+***
+
+
+
+### Submission Instructions
+
+Once you have finished, follow the instructions below to submit your work.
+
+1. At the top of the document, update the `author` field. Do not change anything else at the top of the document.
+
+2. Click the Knit button to create an HTML file of your work.
+
+3. In the Files pane (bottom right window), check the box next to `lab08assignment.html`. 
+
+4. In the Files pane, click on the gear icon (More) and select "Export..."  
+
+5. Do not change the file name (`lab08assignment.html`). Click Download and save the file to your computer. 
+
+6. On the Stats 250 Canvas site, navigate to the Lab 8 assignment. 
+
+7. Upload your saved `lab08assignment.html` file. 
+
+8. Click "Submit Assignment". Congratulations, you are done with Lab 8!
+

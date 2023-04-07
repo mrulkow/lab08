@@ -1,0 +1,174 @@
+---
+title: 'Stats 250: Helpful Functions'
+author: "Instructional Team"
+date: "Week of April 10th"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Helpful Functions
+
+First, load in the stats250package and the penguins data set! 
+
+```{r stats250package}
+library(stats250package)
+```
+
+```{r readPenguins}
+penguins <- read.csv("penguins.csv")
+```
+
+
+Then, check out the various procedures and corresponding functions below.
+
+
+### Difference in Two Means
+
+We may wish to test if flipper length differs, on average, between Adelie and Gentoo penguins. 
+
+This is a little bit tricky, because our data set contains three species, but we can subset the data to include our two species of interest using the following code:
+
+```{r subsetToTwoGroups}
+penguins_subset <- subset(penguins, species == "Adelie" | species == "Gentoo")
+```
+
+- Be careful with spelling and capitalization
+- Note the use of the double equals sign (==)
+- A line (|) is included to filter to both species (Adelie or Gentoo)
+
+
+We could then use this subset (that contains the two species of interest) to descriptively compare the flipper lengths.
+
+```{r boxplot}
+boxplot(penguins_subset$flipper_length_mm ~ penguins_subset$species,
+        xlab = "Species",
+        ylab = "Flipper Length (in mm)",
+        main = "Boxplot of Flipper Length by Species")
+```
+
+- Variables of interest (quantitative by categorical)
+- Labels and title
+
+
+We then need to subset the data to check the assumptions.
+
+```{r subsetAdelie}
+adelie <- subset(penguins, species == "Adelie")
+```
+
+```{r subsetGentoo}
+gentoo <- subset(penguins, species == "Gentoo")
+```
+
+```{r QQPlotAdelie}
+qqnorm(adelie$flipper_length_mm, main = "QQ Plot of Flipper Lengths (Adelie)")
+qqline(adelie$flipper_length_mm)
+```
+
+```{r QQPlotGentoo}
+qqnorm(gentoo$flipper_length_mm, main = "QQ Plot of Flipper Lengths (Gentoo)")
+qqline(gentoo$flipper_length_mm)
+```
+
+
+And then finally, we could run the test for a difference in two means. 
+
+```{r twoMeansHT}
+t.test(penguins_subset$flipper_length_mm ~ penguins_subset$species,
+       mu = 0,
+       alternative = "two.sided")
+```
+
+- Variables of interest (quantitative by categorical)
+- Hypothesized difference
+- Direction of the alternative hypothesis ("less", "greater", or "two.sided")
+
+
+***
+
+
+### Difference in Two Proportions
+
+We may wish to test if the population proportion of male penguins is different between Adelie and Gentoo penguins.
+
+We could subset the data to include the two groups of interest (as done in the first code chunk for a difference in means), but it isn't necessary.
+
+```{r twowayTable}
+addmargins(table(penguins$species, penguins$sex))
+```
+
+Using this table we can calculate the two sample proportions and also calculate the estimate of the common population proportion. For our assumptions, we could use R as a calculator to make sure we have at least 10 success and failures for each species under the null hypothesis.
+
+Then, we would run the test using the `twoPopPropHT()` function. While we haven't used this yet, it is very similar to the `onePopPropHT()` function from Lab 4. 
+
+```{r twoPopPropHT}
+twoPopPropHT(x1 = 80, n1 = 100, x2 = 180, n2 = 200, alt = "two.sided")
+```
+
+- x1 = Number of successes (Group 1)
+- n1 = Sample size (Group 1)
+- x2 = Number of successes (Group 2)
+- n2 = Sample size (Group 2)
+- Direction of the alternative hypothesis ("less", "greater", or "two.sided")
+
+
+***
+
+
+### Linear Relationship
+
+We may wish to test if there is a linear relationship between flipper length and body mass. 
+
+We would start with a scatterplot.
+
+```{r scatterplot}
+plot(body_mass_g ~ flipper_length_mm,
+     data = penguins,
+     xlab = "Flipper Length (in mm)",
+     ylab = "Body Mass (in g)",
+     main = "Scatterplot of Body Mass vs Flipper Length")
+```
+
+- Response variable by explanatory variable
+- Data set of interest
+
+
+In order to check the assumptions for regression, we would actually have to start by creating our model first!
+
+```{r linearModel}
+lm_penguins <- lm(body_mass_g ~ flipper_length_mm, data = penguins)
+```
+
+- Response variable by explanatory variable
+- Data set of interest
+
+
+Then we can use the plot function and the stored linear model to create our two plots used to help check our assumptions. 
+
+```{r residualPlot}
+plot(lm_penguins, which = 1)
+```
+
+```{r qqPlotofResiduals}
+plot(lm_penguins, which = 2)
+```
+
+- which = 1 gives us the residual plot
+- which = 2 gives us the qq plot of the residuals
+
+
+Finally, we can use the summary() function to run the test:
+
+```{r regressionTest}
+summary(lm_penguins)
+```
+
+
